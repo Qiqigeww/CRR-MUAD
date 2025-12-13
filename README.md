@@ -16,7 +16,7 @@ PyTorch Implementation of DI 2025 "Collaborative Reconstruction and Repair for M
 
 ## News
  
- - _08.12.2025_: Accepted by CVPR 2025🎉
+ - _08.12.2025_: Accepted by DI 2025🎉
 
  - _15.12.2025_: Arxiv preprint and github code released🚀
 
