@@ -3,7 +3,7 @@
 # Collaborative Reconstruction and Repair for Multi-class Industrial Anomaly Detection
 
 ### DI(Data Intelligence) 2025 
-[![arXiv](https://img.shields.io/badge/arXiv-2405.14325-b31b1b.svg?style=plastic)](https://arxiv.org/abs/2405.14325) [![CVF](https://img.shields.io/badge/CVPR-Paper-b4c7e7.svg?style=plastic)]
+[![arXiv](https://img.shields.io/badge/arXiv-2405.14325-b31b1b.svg?style=plastic)](https://arxiv.org/abs/2405.14325) 
 
 </div>
 
@@ -122,67 +122,13 @@ python dinomaly_realiad_uni_test.py --data_path ../Real-IAD
 **A. Compare with MUAD SOTAs:**
 <div align="center">
 
-<img alt="image" src="https://github.com/user-attachments/assets/082922bb-e8f8-4efc-9597-2a7dc8577d6e" />
-
-<img width="869" height="482" alt="image" src="https://github.com/user-attachments/assets/9da30ae7-5c7f-4117-ad93-bf12f0fd98f0" />
+<img width="1081" height="852" alt="table1" src="https://github.com/user-attachments/assets/d3030ee2-cfac-49fe-b824-d3b2af55ea64" />
 
 </div>
 
-
-
-**Dinomaly can perfectly scale with model size, input image size, and the choice of foundation model.**
-
-**B. Model Size:**
-<div align="center">
-
-<img width="400" height="220" alt="image" src="https://github.com/user-attachments/assets/6f388ab7-0b81-450b-ae13-358a00c74f3f" />
-
-<img width="865" height="190" alt="image" src="https://github.com/user-attachments/assets/a5d7c83f-bc64-4704-8607-a7a00cffe545" />
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/5005caed-2294-4766-92ed-ee93df5c5428" />
-
-</div>
-
-
-**C. Input Size:**
-<div align="center">
-
-<img width="400" height="220" alt="image" src="https://github.com/user-attachments/assets/e9a324a3-7f26-4d69-8806-a183042a3388" />
-
-<img width="865" height="302" alt="image" src="https://github.com/user-attachments/assets/4f259320-2e4b-4796-aa7e-740bbd246d37" />
-
-</div>
-
-**D. Choice of Foundaiton Model:**
-<div align="center">
-
-<img width="400" height="220" alt="image" src="https://github.com/user-attachments/assets/a1ae0beb-ac5d-4926-94d4-4a99e07de03b" />
-
-<img width="865" height="474" alt="image" src="https://github.com/user-attachments/assets/8c95f29b-578e-481d-bf0c-75429f76158f" />
-
-</div>
-
-
-## Eval discrepancy of anomaly localization
-In our code implementation, we binarize the GT mask using gt.bool() after down-sampling, specifically gt[gt>0]=1. As pointed out in an issue, the previous common practice is to use gt[gt>0.5]=1. 
-The difference between these two binarization approaches is that gt[gt>0]=1 may result in anomaly regions being one pixel larger compared to gt[gt>0.5]=1. This difference does not affect image-level performance metrics, but it has a slight impact on pixel-level evaluation metrics. 
-
-We think gt[gt>0]=1 is a more reasonable choice. It can be seen as max pooling, so that in the down-sampled GT map, any position that corresponds to a region containing at least one anomaly pixel in the original map is marked as anomalous. If an anomaly region is extremely small in the original image (say 2 pixels), gt[gt>0.5]=1 will erase it while gt[gt>0]=1 can keep it.
-
-## Loss NaN
-If you encounter Loss=NaN during training on other datasets (very rare in common datasets), simply add a small eps (1e-6 by default) in the LinearAttention2 module:
-
-`        z = 1.0 / (torch.einsum('...sd,...d->...s', q, k.sum(dim=-2)) + self.eps)
-`
 
 ## Citation
 ```
-@inproceedings{guo2025dinomaly,
-  title={Dinomaly: The less is more philosophy in multi-class unsupervised anomaly detection},
-  author={Guo, Jia and Lu, Shuai and Zhang, Weihang and Chen, Fang and Li, Huiqi and Liao, Hongen},
-  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
-  pages={20405--20415},
-  year={2025}
-}
 
 @article{guo2025one,
   title={One Dinomaly2 Detect Them All: A Unified Framework for Full-Spectrum Unsupervised Anomaly Detection},
