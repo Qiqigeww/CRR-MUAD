@@ -1,11 +1,40 @@
-# Dinomaly
+<div align="center">
 
-PyTorch Implementation of
-"Dinomaly: The Less Is More Philosophy in Multi-Class Unsupervised Anomaly Detection".
+# Collaborative Reconstruction and Repair for Multi-class Industrial Anomaly Detection
 
-The code is preview version, so it could be really ugly with minor errors. We will try to reformat it after the paper is accepted.
+### DI(Data Intelligence) 2025 
+[![arXiv](https://img.shields.io/badge/arXiv-2405.14325-b31b1b.svg?style=plastic)](https://arxiv.org/abs/2405.14325) [![CVF](https://img.shields.io/badge/CVPR-Paper-b4c7e7.svg?style=plastic)]
 
-Give me a star if you like it!!!
+</div>
+
+PyTorch Implementation of DI 2025
+"Collaborative Reconstruction and Repair for Multi-class Industrial Anomaly Detection". 
+
+**Give me a ⭐️ if you like it.**
+
+![Figure2_1.pdf](https://github.com/user-attachments/files/24140945/Figure2_1.pdf)
+
+
+## News
+ - _05.2024_: Arxiv preprint and github code released🚀
+ 
+ - _09.2024_: Rejected by NeurIPS 2024 with 5 positive scores and no negative score, because "AC: lack of novelty"😭. Wish me good luck.
+ 
+ - _02.2025_: Accepted by CVPR 2025🎉
+ 
+ - _07.2025_: Spoil alert: We will come back with Dinomaly2😛
+
+ - _07.2025_: Dinomaly has been integrated in Intel open-edge [Anomalib](https://github.com/open-edge-platform/anomalib) in v2.1.0. Great thanks to the contributors for the nice reproduction and integration. Anomalib is a comprehensive library for benchmarking, developing and deploying deep learning anomaly detection algorithms.
+
+ - _08.2025_: I have sucessfully implement [DINOv3](https://ai.meta.com/dinov3/) on Dinomaly. The pixel-level performance is much better, with slightly lower image-level performance. DINOv3-Large on MVTecAD: I-Auroc:0.9970, P-AUROC:0.9878, P-AP:0.7422, P-F1:0.7184, P-AUPRO:0.9580. Due to DINOv3 requiring newer versions of Python (>3.10) and PyTorch (>2.7), it is not provided in this repository. You can refer to [cnlab](https://github.com/cnulab)'s forked [branch](https://github.com/cnulab/Dinomaly). Great thanks!
+
+ - _**10.2025**_: We are thrilled to present the extended version of Dinomaly, now evolved into [**Dinomaly2**](https://arxiv.org/abs/2510.17611)!!! We introduce the first **unified framework** for **full-spectrum** UAD that seamlessly handles diverse _data modalities_ (2D, multi-view, RGB-3D, RGB-IR), _task settings_ (single-class, multi-class, inference-unified multi-class, few-shot) and application domains (industrial, biological, outdoor). Of course, Dinomaly2 achieves unprecedented UAD performance. Check it out😎
+   <img width="4727" height="3166" alt="fig1" src="https://github.com/user-attachments/assets/dde44a53-eaad-4175-8dc2-205e4c6f71e7" />
+
+   
+## Abstract
+
+Recent studies highlighted a practical setting of unsupervised anomaly detection (UAD) that builds a unified model for multi-class images. Despite various advancements addressing this challenging task, the detection performance under the multi-class setting still lags far behind state-of-the-art class-separated models. Our research aims to bridge this substantial performance gap. In this paper, we introduce a minimalistic reconstruction-based anomaly detection framework, namely Dinomaly, which leverages pure Transformer architectures without relying on complex designs, additional modules, or specialized tricks. Given this powerful framework consisted of only Attentions and MLPs, we found four simple components that are essential to multi-class anomaly detection: (1) Foundation Transformers that extracts universal and discriminative features, (2) Noisy Bottleneck where pre-existing Dropouts do all the noise injection tricks, (3) Linear Attention that naturally cannot focus, and (4) Loose Reconstruction that does not force layer-to-layer and point-by-point reconstruction. Extensive experiments are conducted across popular anomaly detection benchmarks including MVTec-AD, VisA, and Real-IAD. Our proposed Dinomaly achieves impressive image-level AUROC of 99.6%, 98.7%, and 89.3% on the three datasets respectively (99.8%, 98.9%, 90.1% with ViT-L), which is not only superior to state-of-the-art multi-class UAD methods, but also achieves the most advanced class-separated UAD records. 
 
 ## 1. Environments
 
@@ -102,5 +131,87 @@ python dinomaly_visa_sep.py --data_path ../VisA_pytorch/1cls
 python dinomaly_realiad_sep.py --data_path ../Real-IAD
 ```
 
-Training Unstability: The optimization can be unstable with loss spikes (e.g. ...0.05, 0.04, 0.04, **0.32**, **0.23**, 0.08...)
-, which can be harmful to performance. This occurs very very rare. If you see such loss spikes during training, consider change a random seed.
+
+### Trained model weights
+| Dataset                | Model | Resolution  | Iterations  | Download        |
+|----------------------|------------|------------|-------|--------------------|
+| MVTec-AD | DINOv2-B | R448-C392 |20,000 | [Google Drive](https://drive.google.com/file/d/1UvpX0hTZ48FYTxlrDwYa-NZYZcFwjc8r/view?usp=sharing)  |
+| VisA | DINOv2-B | R448-C392 | 20,000 | [Google Drive](https://drive.google.com/file/d/14hkDRPQfcEHKCQbAzAyfY-iFKMWYFD77/view?usp=sharing) |
+
+
+## Results
+
+**A. Compare with MUAD SOTAs:**
+<div align="center">
+
+<img alt="image" src="https://github.com/user-attachments/assets/082922bb-e8f8-4efc-9597-2a7dc8577d6e" />
+
+<img width="869" height="482" alt="image" src="https://github.com/user-attachments/assets/9da30ae7-5c7f-4117-ad93-bf12f0fd98f0" />
+
+</div>
+
+
+
+**Dinomaly can perfectly scale with model size, input image size, and the choice of foundation model.**
+
+**B. Model Size:**
+<div align="center">
+
+<img width="400" height="220" alt="image" src="https://github.com/user-attachments/assets/6f388ab7-0b81-450b-ae13-358a00c74f3f" />
+
+<img width="865" height="190" alt="image" src="https://github.com/user-attachments/assets/a5d7c83f-bc64-4704-8607-a7a00cffe545" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/5005caed-2294-4766-92ed-ee93df5c5428" />
+
+</div>
+
+
+**C. Input Size:**
+<div align="center">
+
+<img width="400" height="220" alt="image" src="https://github.com/user-attachments/assets/e9a324a3-7f26-4d69-8806-a183042a3388" />
+
+<img width="865" height="302" alt="image" src="https://github.com/user-attachments/assets/4f259320-2e4b-4796-aa7e-740bbd246d37" />
+
+</div>
+
+**D. Choice of Foundaiton Model:**
+<div align="center">
+
+<img width="400" height="220" alt="image" src="https://github.com/user-attachments/assets/a1ae0beb-ac5d-4926-94d4-4a99e07de03b" />
+
+<img width="865" height="474" alt="image" src="https://github.com/user-attachments/assets/8c95f29b-578e-481d-bf0c-75429f76158f" />
+
+</div>
+
+
+## Eval discrepancy of anomaly localization
+In our code implementation, we binarize the GT mask using gt.bool() after down-sampling, specifically gt[gt>0]=1. As pointed out in an issue, the previous common practice is to use gt[gt>0.5]=1. 
+The difference between these two binarization approaches is that gt[gt>0]=1 may result in anomaly regions being one pixel larger compared to gt[gt>0.5]=1. This difference does not affect image-level performance metrics, but it has a slight impact on pixel-level evaluation metrics. 
+
+We think gt[gt>0]=1 is a more reasonable choice. It can be seen as max pooling, so that in the down-sampled GT map, any position that corresponds to a region containing at least one anomaly pixel in the original map is marked as anomalous. If an anomaly region is extremely small in the original image (say 2 pixels), gt[gt>0.5]=1 will erase it while gt[gt>0]=1 can keep it.
+
+## Loss NaN
+If you encounter Loss=NaN during training on other datasets (very rare in common datasets), simply add a small eps (1e-6 by default) in the LinearAttention2 module:
+
+`        z = 1.0 / (torch.einsum('...sd,...d->...s', q, k.sum(dim=-2)) + self.eps)
+`
+
+## Citation
+```
+@inproceedings{guo2025dinomaly,
+  title={Dinomaly: The less is more philosophy in multi-class unsupervised anomaly detection},
+  author={Guo, Jia and Lu, Shuai and Zhang, Weihang and Chen, Fang and Li, Huiqi and Liao, Hongen},
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+  pages={20405--20415},
+  year={2025}
+}
+
+@article{guo2025one,
+  title={One Dinomaly2 Detect Them All: A Unified Framework for Full-Spectrum Unsupervised Anomaly Detection},
+  author={Guo, Jia and Lu, Shuai and Fan, Lei and Li, Zelin and Di, Donglin and Song, Yang and Zhang, Weihang and Zhu, Wenbing and Yan, Hong and Chen, Fang and Li, Huiqi and Liao, Hongen},
+  journal={arXiv preprint arXiv:2510.17611},
+  year={2025}
+}
+
+```
+
