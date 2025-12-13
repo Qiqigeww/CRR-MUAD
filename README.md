@@ -114,7 +114,7 @@ python dinomaly_realiad_uni_test.py --data_path ../Real-IAD
 | Dataset                | Model | Resolution  | Iterations  | Download        |
 |----------------------|------------|------------|-------|--------------------|
 | Real-IAD | Seg_model_7999.pth | R448-C392 |8,000 | [Google Drive](https://drive.google.com/file/d/1RXTmMDsE7TjRtTMDIXO0812xDp2vJ_MW/view?usp=sharing)  |
-| Real-IAD | dinov2_vitb14_reg4_pretrain.pth | R448-C392 | 50,000 | [Google Drive](https://drive.google.com/file/d/14hkDRPQfcEHKCQbAzAyfY-iFKMWYFD77/view?usp=sharing) |
+| Real-IAD | dinov2_vitb14_reg4_pretrain.pth | R448-C392 | 50,000 | [Google Drive](https://drive.google.com/file/d/1dZxqiKxApo6fDLiSA-vTLr7aOfMIr3JL/view?usp=sharing) |
 
 
 ## Results
