@@ -7,34 +7,22 @@
 
 </div>
 
-PyTorch Implementation of DI 2025
-"Collaborative Reconstruction and Repair for Multi-class Industrial Anomaly Detection". 
+PyTorch Implementation of DI 2025 "Collaborative Reconstruction and Repair for Multi-class Industrial Anomaly Detection". 
 
 **Give me a ⭐️ if you like it.**
 
-![Figure2_1.pdf](https://github.com/user-attachments/files/24140945/Figure2_1.pdf)
+<img width="2824" height="1575" alt="Figure2_1" src="https://github.com/user-attachments/assets/0ed5f847-43f6-439e-b439-17d46a066def" />
 
 
 ## News
- - _05.2024_: Arxiv preprint and github code released🚀
  
- - _09.2024_: Rejected by NeurIPS 2024 with 5 positive scores and no negative score, because "AC: lack of novelty"😭. Wish me good luck.
- 
- - _02.2025_: Accepted by CVPR 2025🎉
- 
- - _07.2025_: Spoil alert: We will come back with Dinomaly2😛
+ - _08.12.2025_: Accepted by CVPR 2025🎉
 
- - _07.2025_: Dinomaly has been integrated in Intel open-edge [Anomalib](https://github.com/open-edge-platform/anomalib) in v2.1.0. Great thanks to the contributors for the nice reproduction and integration. Anomalib is a comprehensive library for benchmarking, developing and deploying deep learning anomaly detection algorithms.
+ - _15.12.2025_: Arxiv preprint and github code released🚀
 
- - _08.2025_: I have sucessfully implement [DINOv3](https://ai.meta.com/dinov3/) on Dinomaly. The pixel-level performance is much better, with slightly lower image-level performance. DINOv3-Large on MVTecAD: I-Auroc:0.9970, P-AUROC:0.9878, P-AP:0.7422, P-F1:0.7184, P-AUPRO:0.9580. Due to DINOv3 requiring newer versions of Python (>3.10) and PyTorch (>2.7), it is not provided in this repository. You can refer to [cnlab](https://github.com/cnulab)'s forked [branch](https://github.com/cnulab/Dinomaly). Great thanks!
-
- - _**10.2025**_: We are thrilled to present the extended version of Dinomaly, now evolved into [**Dinomaly2**](https://arxiv.org/abs/2510.17611)!!! We introduce the first **unified framework** for **full-spectrum** UAD that seamlessly handles diverse _data modalities_ (2D, multi-view, RGB-3D, RGB-IR), _task settings_ (single-class, multi-class, inference-unified multi-class, few-shot) and application domains (industrial, biological, outdoor). Of course, Dinomaly2 achieves unprecedented UAD performance. Check it out😎
-   <img width="4727" height="3166" alt="fig1" src="https://github.com/user-attachments/assets/dde44a53-eaad-4175-8dc2-205e4c6f71e7" />
-
-   
 ## Abstract
 
-Recent studies highlighted a practical setting of unsupervised anomaly detection (UAD) that builds a unified model for multi-class images. Despite various advancements addressing this challenging task, the detection performance under the multi-class setting still lags far behind state-of-the-art class-separated models. Our research aims to bridge this substantial performance gap. In this paper, we introduce a minimalistic reconstruction-based anomaly detection framework, namely Dinomaly, which leverages pure Transformer architectures without relying on complex designs, additional modules, or specialized tricks. Given this powerful framework consisted of only Attentions and MLPs, we found four simple components that are essential to multi-class anomaly detection: (1) Foundation Transformers that extracts universal and discriminative features, (2) Noisy Bottleneck where pre-existing Dropouts do all the noise injection tricks, (3) Linear Attention that naturally cannot focus, and (4) Loose Reconstruction that does not force layer-to-layer and point-by-point reconstruction. Extensive experiments are conducted across popular anomaly detection benchmarks including MVTec-AD, VisA, and Real-IAD. Our proposed Dinomaly achieves impressive image-level AUROC of 99.6%, 98.7%, and 89.3% on the three datasets respectively (99.8%, 98.9%, 90.1% with ViT-L), which is not only superior to state-of-the-art multi-class UAD methods, but also achieves the most advanced class-separated UAD records. 
+Industrial anomaly detection is a challenging open-set task that aims to identify unknown anomalous patterns deviating from normal data distribution. To avoid the significant memory consumption and limited generalizability brought by building separate models per class, we focus on developing a unified framework for multi-class anomaly detection. However, under this challenging setting, conventional reconstruction-based networks often suffer from an identity mapping problem, where they directly replicate input features regardless of whether they are normal or anomalous, resulting in detection failures. To address this issue, this study proposes a novel framework termed Collaborative Reconstruction and Repair (CRR), which transforms the reconstruction to repairation. First, we optimize the decoder to reconstruct normal samples while repairing synthesized anomalies. Consequently, it generates distinct representations for anomalous regions and similar representations for normal areas compared to the encoder's output. Second, we implement feature-level random masking to ensure that the representations from decoder contain sufficient local information. Finally, to minimize detection errors arising from the discrepancies between feature representations from the encoder and decoder, we train a segmentation network supervised by synthetic anomaly masks, thereby enhancing localization performance. Extensive experiments on industrial datasets that CRR effectively mitigates the identity mapping issue and achieves state-of-the-art performance in multi-class industrial anomaly detection.
 
 ## 1. Environments
 
@@ -109,34 +97,24 @@ Download and unzip `realiad_1024` and `realiad_jsons` in `../Real-IAD`.
 ```
 
 ## 3. Run Experiments
-Multi-Class Setting
+Training Stage I
 ```
-python dinomaly_mvtec_uni.py --data_path ../mvtec_anomaly_detection
+python dinomaly_realiad_uni_first.py --data_path ../Real-IAD
 ```
+Training Phase II
 ```
-python dinomaly_visa_uni.py --data_path ../VisA_pytorch/1cls
+python dinomaly_realiad_uni_second.py --data_path ../Real-IAD
 ```
+Testing phase
 ```
-python dinomaly_realiad_uni.py --data_path ../Real-IAD
+python dinomaly_realiad_uni_test.py --data_path ../Real-IAD
 ```
-
-Conventional Class-Separted Setting
-```
-python dinomaly_mvtec_sep.py --data_path ../mvtec_anomaly_detection
-```
-```
-python dinomaly_visa_sep.py --data_path ../VisA_pytorch/1cls
-```
-```
-python dinomaly_realiad_sep.py --data_path ../Real-IAD
-```
-
 
 ### Trained model weights
 | Dataset                | Model | Resolution  | Iterations  | Download        |
 |----------------------|------------|------------|-------|--------------------|
-| MVTec-AD | DINOv2-B | R448-C392 |20,000 | [Google Drive](https://drive.google.com/file/d/1UvpX0hTZ48FYTxlrDwYa-NZYZcFwjc8r/view?usp=sharing)  |
-| VisA | DINOv2-B | R448-C392 | 20,000 | [Google Drive](https://drive.google.com/file/d/14hkDRPQfcEHKCQbAzAyfY-iFKMWYFD77/view?usp=sharing) |
+| Real-IAD | Seg_model_7999.pth | R448-C392 |8,000 | [Google Drive](https://drive.google.com/file/d/1RXTmMDsE7TjRtTMDIXO0812xDp2vJ_MW/view?usp=sharing)  |
+| Real-IAD | dinov2_vitb14_reg4_pretrain.pth | R448-C392 | 50,000 | [Google Drive](https://drive.google.com/file/d/14hkDRPQfcEHKCQbAzAyfY-iFKMWYFD77/view?usp=sharing) |
 
 
 ## Results
