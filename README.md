@@ -3,7 +3,7 @@
 # Collaborative Reconstruction and Repair for Multi-class Industrial Anomaly Detection
 
 ### DI(Data Intelligence) 2025 
-[![arXiv](https://img.shields.io/badge/arXiv-2405.14325-b31b1b.svg?style=plastic)](https://arxiv.org/abs/2405.14325) 
+[![arXiv](https://img.shields.io/badge/arXiv-2405.14325-b31b1b.svg?style=plastic)](http://arxiv.org/abs/2512.11401) 
 
 </div>
 
@@ -131,7 +131,7 @@ python dinomaly_realiad_uni_test.py --data_path ../Real-IAD
 ```
 
 @article{guo2025one,
-  title={One Dinomaly2 Detect Them All: A Unified Framework for Full-Spectrum Unsupervised Anomaly Detection},
+  title={Collaborative Reconstruction and Repair for Multi-class Industrial Anomaly Detection},
   author={Guo, Jia and Lu, Shuai and Fan, Lei and Li, Zelin and Di, Donglin and Song, Yang and Zhang, Weihang and Zhu, Wenbing and Yan, Hong and Chen, Fang and Li, Huiqi and Liao, Hongen},
   journal={arXiv preprint arXiv:2510.17611},
   year={2025}
