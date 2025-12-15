@@ -139,3 +139,7 @@ python dinomaly_realiad_uni_test.py --data_path ../Real-IAD
 
 ```
 
+
+## Acknowledge
+
+We thank the great work [Dinomaly](https://github.com/guojiajeremy/Dinomaly) for assisting with our work.
