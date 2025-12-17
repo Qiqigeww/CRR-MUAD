@@ -18,7 +18,7 @@ PyTorch Implementation of DI 2025 "Collaborative Reconstruction and Repair for M
  
  - _08.12.2025_: Accepted by DI 2025🎉
 
- - _15.12.2025_: Arxiv preprint and github code released🚀
+ - _15.12.2025_: We released the arXiv preprint and the GitHub code, and the work was included in the popular industrial anomaly detection repository [awesome-industrial-anomaly-detection](https://github.com/M-3LAB/awesome-industrial-anomaly-detection).🚀
 
 ## Abstract
 
