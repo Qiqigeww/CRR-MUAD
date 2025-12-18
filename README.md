@@ -130,10 +130,10 @@ python dinomaly_realiad_uni_test.py --data_path ../Real-IAD
 ## Citation
 ```
 
-@article{guo2025one,
+@article{wang2025collaborativereconstructionrepairmulticlass,
   title={Collaborative Reconstruction and Repair for Multi-class Industrial Anomaly Detection},
-  author={Guo, Jia and Lu, Shuai and Fan, Lei and Li, Zelin and Di, Donglin and Song, Yang and Zhang, Weihang and Zhu, Wenbing and Yan, Hong and Chen, Fang and Li, Huiqi and Liao, Hongen},
-  journal={arXiv preprint arXiv:2510.17611},
+  author={Qishan Wang and Haofeng Wang and Shuyong Gao and Jia Guo and Li Xiong and Jiaqi Li and Dengxuan Bai and Wenqiang Zhang},
+  journal={arXiv preprint arXiv:2512.11401},
   year={2025}
 }
 
